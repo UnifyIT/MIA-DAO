@@ -17,19 +17,27 @@ class MIA {
     this._web3 = web3
   }
   
-  public async contract() {
-    const contract = this._web3?.getContract(RINKEBY_MIA_TOKEN, MIA_ABI);
-    const balanceOf = await contract?.balanceOf("0x44A814f80c14977481b47C613CD020df6ea3D25D")
-    console.log("contract", contract);
-    console.log("balanceOf", balanceOf);
+  private async test_contract() {
+    try {
+      const contract = this._web3?.getContract(RINKEBY_MIA_TOKEN, MIA_ABI);
+      const balanceOf = await contract?.balanceOf("0x44A814f80c14977481b47C613CD020df6ea3D25D")
+      console.log("contract", contract);
+      console.log("balanceOf", balanceOf);
+    } catch (error) {
+      console.log('error in contract()', error);
+    }
   }
 
   public static getInstance() {
     if (!this._instance) {
-      const instance = new MIA();
-      instance.initialize();
-      this._instance = instance;
-      this._instance.contract()
+      try {
+        const instance = new MIA();
+        instance.initialize();
+        this._instance = instance;
+        this._instance.test_contract();
+      } catch (error) {
+        console.log('error in getInstance()', error);
+      }
     }
     return this._instance;
   }

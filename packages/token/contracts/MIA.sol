@@ -14,6 +14,10 @@ contract MIA is ERC20 {
     _mint(0x5Db06acd673531218B10430bA6dE9b69913Ad545, initialSupply);
     // Scott
     _mint(0x5eE2A41A96bA013d502F5cf3d250F73D88c22a6c, initialSupply);
+    // Jorge
+    _mint(0xE3EDE12b72Da70CF0aeCE9f27E9c443B2b4F93Bf, initialSupply);
+    // NestorB
+    _mint(0x00F51D0eEd160D53F9D90e70b35A43EbfB618c5b, initialSupply);
   }
 
 }
