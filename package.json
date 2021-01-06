@@ -1,0 +1,9 @@
+{
+  "name": "mia-dao",
+  "scripts": {
+    "ui": "cd packages && cd ui && yarn start",
+    "contracts:compile": "cd packages && cd token && yarn compile",
+    "contracts:deploy": "cd packages && cd token && yarn deploy",
+    "contracts:test": "cd packages && cd token && yarn test"
+  }
+}
