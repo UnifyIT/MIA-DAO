@@ -12,8 +12,9 @@ class MIA {
     
   }
   
-  private initialize() {
+  private async initialize() {
     const web3 = new Web3({ provider });
+    await provider.enable()
     this._web3 = web3
   }
   
