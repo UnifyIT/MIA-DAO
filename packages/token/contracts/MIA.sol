@@ -11,7 +11,7 @@ contract MIA is ERC20 {
     _setupDecimals(decimals);
     _mint(msg.sender, initialSupply);
     // hg
-    _mint(0x5Db06acd673531218B10430bA6dE9b69913Ad545, initialSupply);
+    // _mint(0x5Db06acd673531218B10430bA6dE9b69913Ad545, initialSupply);
     // Scott
     _mint(0x5eE2A41A96bA013d502F5cf3d250F73D88c22a6c, initialSupply);
     // Jorge
