@@ -7,6 +7,9 @@ import './App.css';
 
 function App() {
   const componentDidMount = () => {
+    getMia();
+  }
+  const getMia = async () => {
     MIA.getInstance()
   }
   useEffect(componentDidMount, []);

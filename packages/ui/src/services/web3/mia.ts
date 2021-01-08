@@ -16,9 +16,10 @@ class MIA {
     const web3 = new Web3({ provider });
     await provider.enable()
     this._web3 = web3
+    this.test_contract();
   }
   
-  private async test_contract() {
+  public async test_contract() {
     try {
       const contract = this._web3?.getContract(RINKEBY_MIA_TOKEN, MIA_ABI);
       const balanceOf = await contract?.balanceOf("0x44A814f80c14977481b47C613CD020df6ea3D25D")
@@ -35,7 +36,6 @@ class MIA {
         const instance = new MIA();
         instance.initialize();
         this._instance = instance;
-        this._instance.test_contract();
       } catch (error) {
         console.log('error in getInstance()', error);
       }
