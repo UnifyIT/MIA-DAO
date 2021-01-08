@@ -8,6 +8,7 @@ const provider = (window as any).ethereum
 class MIA {
   private static _instance: MIA | undefined
   private _web3: Web3 | undefined
+  private _contract: any;
   private constructor() {
     
   }
@@ -15,26 +16,31 @@ class MIA {
   private async initialize() {
     const web3 = new Web3({ provider });
     await provider.enable()
+    const contract = web3.getContract(RINKEBY_MIA_TOKEN, MIA_ABI);
     this._web3 = web3
-    this.test_contract();
+    this._contract = contract
   }
   
-  public async test_contract() {
-    try {
-      const contract = this._web3?.getContract(RINKEBY_MIA_TOKEN, MIA_ABI);
-      const balanceOf = await contract?.balanceOf("0x44A814f80c14977481b47C613CD020df6ea3D25D")
-      console.log("contract", contract);
-      console.log("balanceOf", balanceOf);
-    } catch (error) {
-      console.log('error in contract()', error);
-    }
+  public async contractAddress () {
+    return await this._contract.address;
+  }
+  
+  public async userAddress() {
+    return this._web3?.getAddress();
+  }
+  
+  public async userBalance() {
+    const address = await this.userAddress()
+    const balanceOf = await this._contract.balanceOf(address);
+    // divide it by 1e6 since token has only 6 decimals for now.
+    return balanceOf.div(1e6)
   }
 
-  public static getInstance() {
+  public static async getInstance() {
     if (!this._instance) {
       try {
         const instance = new MIA();
-        instance.initialize();
+        await instance.initialize();
         this._instance = instance;
       } catch (error) {
         console.log('error in getInstance()', error);

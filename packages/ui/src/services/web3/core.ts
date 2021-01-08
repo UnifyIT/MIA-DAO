@@ -1,4 +1,5 @@
 import { Signer, ethers, providers, utils } from "ethers";
+
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Base58 } from "@ethersproject/basex";
 
@@ -161,5 +162,10 @@ export class Web3 {
     } else {
       throw Error(`Unkown CID format, CID hash: ${hash}`);
     }
+  }
+  
+  public getAddress(): string {
+    const { selectedAddress: address } = this._config.provider as any
+    return address;
   }
 }
