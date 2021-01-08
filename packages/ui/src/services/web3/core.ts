@@ -168,4 +168,9 @@ export class Web3 {
     const { selectedAddress: address } = this._config.provider as any
     return address;
   }
+  
+  public getNetwork(): number {
+    const { chainId } = this._config.provider as any;
+    return Number(chainId);
+  }
 }

@@ -16,9 +16,14 @@ class MIA {
   private async initialize() {
     const web3 = new Web3({ provider });
     await provider.enable()
-    const contract = web3.getContract(RINKEBY_MIA_TOKEN, MIA_ABI);
-    this._web3 = web3
-    this._contract = contract
+    const networkId = await web3.getNetwork();
+    if(networkId === 0x4 || networkId == 4) {
+      const contract = web3.getContract(RINKEBY_MIA_TOKEN, MIA_ABI);
+      this._web3 = web3
+      this._contract = contract
+    } else {
+      alert("SWITCH METAMASK NETWORK TO RINKEBY");
+    }
   }
   
   public async contractAddress () {
