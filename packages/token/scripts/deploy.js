@@ -29,7 +29,7 @@ async function main() {
   console.log("MIA deployed to:", mia.address);
   const fileObject = {};
   fileObject[HARDHAT_NETWORK] = mia.address;
-  writeFileSync(`../ui/src/services/web3/mia-token-address.json`, JSON.stringify(fileObject));
+  writeFileSync(`../ui/src/services/web3/${HARDHAT_NETWORK}mia-token-address.json`, JSON.stringify(fileObject));
 }
 
 // We recommend this pattern to be able to use async/await everywhere
