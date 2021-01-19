@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { Chip } from '@material-ui/core';
 
 import {
-  AccountInfo, 
-  ContractInfo, 
+  AccountInfo,
+  ContractInfo,
   Transfer,
 
 } from "components";
@@ -34,7 +35,10 @@ function Home() {
   return (
     <div className="Home">
         <p>
-          MIA TOKEN TESTER UI
+          <Chip
+            label="MIA TOKEN TESTER UI"
+            color="primary"
+          />
         </p>
         <ContractInfo address={miaContractAddress} />
         <AccountInfo balance={balance} address={address}/>
