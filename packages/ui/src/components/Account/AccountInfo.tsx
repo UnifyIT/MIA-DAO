@@ -1,4 +1,5 @@
 import React from "react";
+import { Typography, Button } from '@material-ui/core';
 
 import { thousandsSeparator } from "utils";
 
@@ -11,10 +12,14 @@ function AccountInfo(props: AccountInfo) {
   return (
     <>
       <p>
-        Address: { props.address }
+        <Typography variant="caption">
+          Address: { props.address }
+        </Typography>
       </p>
       <p>
-        Balance: { thousandsSeparator(props.balance) }
+      <Button variant="outlined">
+        <Typography variant="caption">Balance: { thousandsSeparator(props.balance) } MIA</Typography>
+      </Button>
       </p>
     </>
   );

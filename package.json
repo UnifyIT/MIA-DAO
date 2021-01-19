@@ -1,5 +1,6 @@
 {
   "name": "mia-dao",
+  "license": "MIT",
   "scripts": {
     "ui": "cd packages && cd ui && yarn start",
     "contracts:compile": "cd packages && cd token && yarn compile",
