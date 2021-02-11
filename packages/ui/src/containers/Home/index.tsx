@@ -34,12 +34,10 @@ function Home() {
 
   return (
     <div className="Home">
-        <p>
-          <Chip
-            label="MIA TOKEN TESTER UI"
-            color="primary"
-          />
-        </p>
+        <Chip
+          label="MIA TOKEN TESTER UI"
+          color="primary"
+        />
         <ContractInfo address={miaContractAddress} />
         <AccountInfo balance={balance} address={address}/>
         <Transfer />

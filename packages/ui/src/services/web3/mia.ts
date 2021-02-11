@@ -1,7 +1,7 @@
 import BN from "bn.js"
 import { Web3 } from "services/web3";
 import MIA_ABI from "services/web3/abis/miaERC20.json"
-import { RINKEBY_MIA_TOKEN } from "services/web3/addresses";
+import { RINKEBY_MIA_TOKEN, RINKEBY_V2_MIA_TOKEN } from "services/web3/addresses";
 
 const provider = (window as any).ethereum
 
@@ -62,6 +62,11 @@ class MIA {
     const sendAmount = (bigNumberAmount.mul(exponent)).toNumber();
     console.log(sendAmount)
     this._contract.transfer(address, sendAmount);
+  }
+  
+  public async printContract () {
+    const v2 = this._web3?.getContract(RINKEBY_V2_MIA_TOKEN, MIA_ABI);
+    console.log('v2', v2);
   }
 
 }

@@ -39,7 +39,12 @@ function Transfer(props: any){
     const { value } = event.target;
     setSendAmount(value);
   }
-
+  
+  const printContract = async () => {
+    const mia = await MIA.getInstance();
+    await mia?.printContract();
+  }
+  
   return (
     <>
       <form onSubmit={onSubmit}>
@@ -51,6 +56,7 @@ function Transfer(props: any){
           </div>
       </form>
       <br></br>
+      <Button color= "primary" variant="contained" onClick={printContract}>Print Contract</Button>
       <Typography variant="caption">Transfer {sendAmount} MIA Token to { sendAddress }</Typography>
     </>
   )
