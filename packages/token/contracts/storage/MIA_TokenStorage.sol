@@ -1,4 +1,4 @@
-//SPDX-License-Identifier: Unlicense
+//SPDX-License-Identifier: MIT
 pragma solidity ^0.7.0;
 import "hardhat/console.sol";
 
@@ -19,4 +19,19 @@ contract MIA_TokenStorage {
     balances = MIA_BalanceSheet(_balances);
     allowances = MIA_AllowanceSheet(_allowances);
   }
+
+  /**
+  * @dev claim ownership of balance sheet passed into constructor.
+  **/
+  function claimBalanceOwnership() public {
+      balances.claimOwnership();
+  }
+
+  /**
+  * @dev claim ownership of allowance sheet passed into constructor.
+  **/
+  function claimAllowanceOwnership() public {
+      allowances.claimOwnership();
+  }
+
 }

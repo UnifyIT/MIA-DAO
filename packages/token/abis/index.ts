@@ -1,0 +1,1 @@
+export const MIA_V0 = require("../artifacts/contracts/MIA_V0.sol/MIA_V0.json").abi;

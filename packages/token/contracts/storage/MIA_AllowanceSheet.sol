@@ -1,9 +1,9 @@
-//SPDX-License-Identifier: Unlicense
+//SPDX-License-Identifier: MIT
 pragma solidity ^0.7.0;
 import "hardhat/console.sol";
 import "@openzeppelin/contracts/math/SafeMath.sol";
 
-import "../helpers/MIA_Ownable.sol";
+import "../access/MIA_Ownable.sol";
 /**
 * @title MIA AllowanceSheet
 * @notice A wrapper around the allowanceOf mapping. 

@@ -1,4 +1,8 @@
+//SPDX-License-Identifier: MIT
+pragma solidity ^0.7.3;
+
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "hardhat/console.sol";
 
 contract MIA_Ownable is Ownable {
   address public pendingOwner;
@@ -8,6 +12,9 @@ contract MIA_Ownable is Ownable {
    * account.
    */
   constructor() public {
+    console.log("MIA_Ownable");
+    console.log("owner()", owner());
+    console.log("_msgSender()", _msgSender());
     pendingOwner = address(0);
   }
 
