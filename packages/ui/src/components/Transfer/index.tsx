@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { Typography, TextField, Button } from '@material-ui/core';
 
 import { MIA } from "services/web3";
-// import BN from "bn.js"
-type BigNumberish = number
-type BytesLike = Buffer
+
+type BigNumberish = number;
+type BytesLike = Buffer;
 
 export type TransactionRequest = {
     to?: string,
