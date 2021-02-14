@@ -12,9 +12,11 @@ contract MIA_Ownable is Ownable {
    * account.
    */
   constructor() public {
+    console.log("this", address(this));
     console.log("MIA_Ownable");
     console.log("owner()", owner());
     console.log("_msgSender()", _msgSender());
+    console.log("****1****");
     pendingOwner = address(0);
   }
 

@@ -7,11 +7,11 @@ describe("MIA MIA_TokenProxy contract", function() {
     const MIA_BalanceSheet = await hre.ethers.getContractFactory("MIA_BalanceSheet");
     const miaBalanceSheet = await MIA_BalanceSheet.deploy();
     await miaBalanceSheet.deployed();
-    console.log("miaBalanceSheet.owner()", await miaBalanceSheet.owner());
+    // console.log("miaBalanceSheet.owner()", await miaBalanceSheet.owner());
     const MIA_AllowanceSheet = await hre.ethers.getContractFactory("MIA_AllowanceSheet");
     const miaAllowanceSheet = await MIA_AllowanceSheet.deploy();
     await miaAllowanceSheet.deployed();
-    console.log("miaAllowanceSheet.owner()", await miaAllowanceSheet.owner());
+    // console.log("miaAllowanceSheet.owner()", await miaAllowanceSheet.owner());
     const MIA = await hre.ethers.getContractFactory("MIA_V0");
 
     const config = {
