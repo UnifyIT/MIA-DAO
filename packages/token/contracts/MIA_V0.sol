@@ -17,7 +17,8 @@ import "./storage/MIA_TokenStorage.sol";
     address _allowances,
     uint8 _decimals
   ) ERC20(_name, _symbol) MIA_TokenStorage(_balances, _allowances) public {
-    // console.log("HELLO MIA_V0");
+    console.log("HELLO MIA_V0");
+    console.log("MIA_V0 address(this)", address(this));
     // console.log("constructor");
     // console.log("msg.sender");
     // console.log(msg.sender);
@@ -40,16 +41,25 @@ import "./storage/MIA_TokenStorage.sol";
       return balances.balanceOf(who);
   }
 
-  function mint(address _to, uint256 _amount) public onlyOwner {
-      // console.log("mint");
-      // console.log("msg.sender");
-      // console.log(msg.sender);
+  function mint(address _to, uint256 _amount) public onlyOwner2 {
+      console.log("     ");
+      console.log("1");
+      console.log("mint");
+      console.log("msg.sender");
+      console.log(msg.sender);
       return _mint(_to, _amount);
   }
   
   function _mint(address _to, uint256 _amount) internal override {
+      console.log("     ");
+      console.log("_mint");
+      console.log("2");
       balances.addTotalSupply(_amount);
+      console.log("3");
       balances.addBalance(_to, _amount);
+      console.log("4");
+      console.log("msg.sender");
+      console.log(msg.sender);
       emit Mint(_to, _amount);
       emit Transfer(address(0), _to, _amount);
   }

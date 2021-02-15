@@ -15,9 +15,14 @@ contract MIA_TokenStorage {
   MIA_AllowanceSheet public allowances;
 
   constructor(address _balances, address _allowances) public {
+    console.log("        ");
     console.log("MIA Token Storage");
+    console.log("msg.sender", msg.sender);
+    console.log("MIATokenStorage address(this)", address(this));
     balances = MIA_BalanceSheet(_balances);
     allowances = MIA_AllowanceSheet(_allowances);
+    
+    console.log("****3****");
   }
 
   /**

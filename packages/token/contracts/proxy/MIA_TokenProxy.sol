@@ -7,8 +7,8 @@ import "../access/MIA_Ownable.sol";
 import "../storage/MIA_TokenStorage.sol";
 
 contract MIA_TokenProxy is UpgradeableProxy, MIA_Ownable, MIA_TokenStorage {
-  constructor(address _implementation, address _balances, address _allowances) 
-  UpgradeableProxy(_implementation, "")
+  constructor(address _implementation, bytes memory _logic, address _balances, address _allowances) 
+  UpgradeableProxy(_implementation, _logic)
   MIA_TokenStorage(_balances, _allowances) public {}
 
   function upgradeTo(address newImplementation) public onlyOwner {
