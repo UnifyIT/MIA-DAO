@@ -7,6 +7,11 @@ export type { UpgradeableProxy } from "./UpgradeableProxy";
 export type { ERC20 } from "./ERC20";
 export type { IERC20 } from "./IERC20";
 export type { MIA } from "./MIA";
+export type { Ownable } from "./Ownable";
+export type { Registry } from "./Registry";
+export type { Storage } from "./Storage";
+export type { TokenV0 } from "./TokenV0";
+export type { TokenV1 } from "./TokenV1";
 
 export { Ownable__factory } from "./factories/Ownable__factory";
 export { Proxy__factory } from "./factories/Proxy__factory";
@@ -14,3 +19,8 @@ export { UpgradeableProxy__factory } from "./factories/UpgradeableProxy__factory
 export { ERC20__factory } from "./factories/ERC20__factory";
 export { IERC20__factory } from "./factories/IERC20__factory";
 export { MIA__factory } from "./factories/MIA__factory";
+export { Ownable__factory } from "./factories/Ownable__factory";
+export { Registry__factory } from "./factories/Registry__factory";
+export { Storage__factory } from "./factories/Storage__factory";
+export { TokenV0__factory } from "./factories/TokenV0__factory";
+export { TokenV1__factory } from "./factories/TokenV1__factory";

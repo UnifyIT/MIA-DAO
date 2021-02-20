@@ -34,6 +34,7 @@
     "test": "npx hardhat test",
     "test:tokens": "npx hardhat test test/deploy-tokens.test.ts",
     "test:storage": "npx hardhat test test/deploy-tokens-storage.test.ts",
-    "test:proxy": "npx hardhat test test/deploy-tokens-proxy.test.ts"
+    "test:proxy": "npx hardhat test test/deploy-tokens-proxy.test.ts",
+    "test:upgradable-token": "npx hardhat test test/deploy-upgradable-token-proxy.test.ts"
   }
 }
