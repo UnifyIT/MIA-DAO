@@ -32,11 +32,11 @@ describe("Upgradable Token contract", function() {
     console.log("registryProxy.val1()", val1.toString())
     console.log("registryProxy.val2()", (await registryProxy.val()).toString())
 
-    try {
-
-    } catch (error) {
-      
-    }
+    // try {
+    // 
+    // } catch (error) {
+    // 
+    // }
     // expect(proxy).to.exist;
     // expect(proxy.address).to.exist;
   })

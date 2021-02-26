@@ -3,10 +3,15 @@
 /* eslint-disable */
 export type { Ownable } from "./Ownable";
 export type { Proxy } from "./Proxy";
+export type { ProxyAdmin } from "./ProxyAdmin";
+export type { TransparentUpgradeableProxy } from "./TransparentUpgradeableProxy";
 export type { UpgradeableProxy } from "./UpgradeableProxy";
 export type { ERC20 } from "./ERC20";
 export type { IERC20 } from "./IERC20";
 export type { MIA } from "./MIA";
+export type { MIAAdminProxy } from "./MIAAdminProxy";
+export type { MIALogicV0 } from "./MIALogicV0";
+export type { MIATransparentUpgradableProxy } from "./MIATransparentUpgradableProxy";
 export type { Ownable } from "./Ownable";
 export type { Registry } from "./Registry";
 export type { Storage } from "./Storage";
@@ -15,10 +20,15 @@ export type { TokenV1 } from "./TokenV1";
 
 export { Ownable__factory } from "./factories/Ownable__factory";
 export { Proxy__factory } from "./factories/Proxy__factory";
+export { ProxyAdmin__factory } from "./factories/ProxyAdmin__factory";
+export { TransparentUpgradeableProxy__factory } from "./factories/TransparentUpgradeableProxy__factory";
 export { UpgradeableProxy__factory } from "./factories/UpgradeableProxy__factory";
 export { ERC20__factory } from "./factories/ERC20__factory";
 export { IERC20__factory } from "./factories/IERC20__factory";
 export { MIA__factory } from "./factories/MIA__factory";
+export { MIAAdminProxy__factory } from "./factories/MIAAdminProxy__factory";
+export { MIALogicV0__factory } from "./factories/MIALogicV0__factory";
+export { MIATransparentUpgradableProxy__factory } from "./factories/MIATransparentUpgradableProxy__factory";
 export { Ownable__factory } from "./factories/Ownable__factory";
 export { Registry__factory } from "./factories/Registry__factory";
 export { Storage__factory } from "./factories/Storage__factory";

@@ -6,3 +6,5 @@ export const MIA_BalanceSheet = require("../artifacts/contracts/storage/MIA_Bala
 export const MIA_TokenProxy = require("../artifacts/contracts/proxy/MIA_TokenProxy.sol/MIA_TokenProxy.json").abi;
 
 export const TokenV0 = require("../artifacts/contracts/upgradable-pattern/TokenV0.sol/TokenV0.json").abi;
+
+export const ProxyAdmin = {}

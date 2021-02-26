@@ -3,7 +3,10 @@
   "dependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.1",
     "@nomiclabs/hardhat-waffle": "^2.0.1",
+    "@openzeppelin/cli": "^2.8.2",
     "@openzeppelin/contracts": "^3.3.0",
+    "@openzeppelin/contracts-ethereum-package": "^3.0.0",
+    "@openzeppelin/hardhat-upgrades": "^1.6.0",
     "@typechain/ethers-v5": "^5.0.0",
     "@types/chai": "^4.2.14",
     "@types/mocha": "^8.2.0",
@@ -31,10 +34,12 @@
     "deploy:v2": "yarn deploy:v2:rinkeby",
     "deploy:v2:rinkeby": "npx hardhat run scripts/deploy/deploy-v2.js --network rinkeby",
     "mint:token:v0:rinkeby": "npx hardhat run scripts/mint/index.ts --network rinkeby",
-    "test": "npx hardhat test",
+    "test": "yarn test:proxy2",
+    "test2": "npx hardhat test",
     "test:tokens": "npx hardhat test test/deploy-tokens.test.ts",
     "test:storage": "npx hardhat test test/deploy-tokens-storage.test.ts",
     "test:proxy": "npx hardhat test test/deploy-tokens-proxy.test.ts",
-    "test:upgradable-token": "npx hardhat test test/deploy-upgradable-token.test.ts"
+    "test:upgradable-token": "npx hardhat test test/deploy-upgradable-token.test.ts",
+    "test:proxy2": "npx hardhat test test/proxy/deploy-proxy.test.ts"
   }
 }
