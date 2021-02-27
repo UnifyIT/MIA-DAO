@@ -8,7 +8,7 @@ import "hardhat/console.sol";
 
 contract MIALogicV0 is Initializable, ERC20, Ownable {
   using SafeMath for uint256;
-  int someStateNum = 2;
+  int256 someStateNum = 2;
   
   constructor() ERC20("MIA DAO", "MIA") {
 
@@ -18,11 +18,11 @@ contract MIALogicV0 is Initializable, ERC20, Ownable {
     _setupDecimals(6);
   }
   
-  function setSomeStateNum(int num) public {
+  function setSomeStateNum(int256 num) public {
     someStateNum = num;
   }
   
-  function getSomeStateNum() public returns(int ){
+  function getSomeStateNum() public returns(int256){
     return someStateNum;
   }
 
