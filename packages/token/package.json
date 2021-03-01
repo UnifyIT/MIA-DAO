@@ -40,6 +40,7 @@
     "test:storage": "npx hardhat test test/deploy-tokens-storage.test.ts",
     "test:proxy": "npx hardhat test test/deploy-tokens-proxy.test.ts",
     "test:upgradable-token": "npx hardhat test test/deploy-upgradable-token.test.ts",
-    "test:proxy2": "npx hardhat test test/proxy/deploy-proxy.test.ts"
+    "test:proxy2": "npx hardhat test test/proxy/deploy-proxy.test.ts",
+    "scripts": "npx hardhat run scripts/deploy/proxy/deploy.ts --network rinkeby"
   }
 }

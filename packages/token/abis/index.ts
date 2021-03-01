@@ -8,3 +8,11 @@ export const MIA_TokenProxy = require("../artifacts/contracts/proxy/MIA_TokenPro
 export const TokenV0 = require("../artifacts/contracts/upgradable-pattern/TokenV0.sol/TokenV0.json").abi;
 
 export const ProxyAdmin = {}
+
+
+
+export const AdminProxy = require("../artifacts/@openzeppelin/contracts/proxy/ProxyAdmin.sol/ProxyAdmin.json")
+export const TransparentUpgradeableProxy = require("../artifacts/@openzeppelin/contracts/proxy/TransparentUpgradeableProxy.sol/TransparentUpgradeableProxy.json")
+
+export const AdminProxyABI = require("../artifacts/@openzeppelin/contracts/proxy/ProxyAdmin.sol/ProxyAdmin.json").abi
+export const TransparentUpgradeableProxyABI = require("../artifacts/@openzeppelin/contracts/proxy/TransparentUpgradeableProxy.sol/TransparentUpgradeableProxy.json").abi

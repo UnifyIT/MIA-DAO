@@ -14,7 +14,8 @@ contract MIALogicV0 is Initializable, ERC20, Ownable {
 
   }
   
-  function initialize() public initializer onlyOwner {
+  function initialize() external initializer onlyOwner {
+    console.log("Initialize is Success");
     _setupDecimals(6);
   }
   
