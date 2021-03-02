@@ -1,7 +1,8 @@
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.7.0;
 
-import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+// import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "../erc20/MIA_ERC20.sol";
 import "@openzeppelin/contracts/proxy/Initializable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/math/SafeMath.sol";
@@ -68,8 +69,8 @@ contract MIATokenV0 is Initializable, ERC20, MIALedger, Ownable {
   
   function balanceOf(address _user) public view override returns(uint256) {
     console.log("balanceOf(address _user)", _user);
-    // return balances.balanceOf[_user];
-    return 1;
+    return balances.balanceOf[_user];
+    // return 1;
   }
   
   function allowance(address owner, address spender) public override view returns(uint256) {
