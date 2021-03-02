@@ -27,7 +27,7 @@ describe("MIA Admin Proxy contract", function() {
         const miaTokenV0 = await MIATokenV0.deploy();
       
         const { address: miaTokenV0Address } = miaTokenV0;
-      
+
         console.log("MIAAllowanceSheet address: ", allowanceSheetAddress);
         console.log("MIABalanceSheet address: ", balanceSheetAddress );
         console.log("MIATokenV0 address: ", miaTokenV0Address);
