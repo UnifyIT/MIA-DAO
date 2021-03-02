@@ -8,15 +8,10 @@ export type { TransparentUpgradeableProxy } from "./TransparentUpgradeableProxy"
 export type { UpgradeableProxy } from "./UpgradeableProxy";
 export type { ERC20 } from "./ERC20";
 export type { IERC20 } from "./IERC20";
-export type { MIA } from "./MIA";
-export type { MIAAdminProxy } from "./MIAAdminProxy";
-export type { MIALogicV0 } from "./MIALogicV0";
-export type { MIATransparentUpgradableProxy } from "./MIATransparentUpgradableProxy";
-export type { Ownable } from "./Ownable";
-export type { Registry } from "./Registry";
-export type { Storage } from "./Storage";
-export type { TokenV0 } from "./TokenV0";
-export type { TokenV1 } from "./TokenV1";
+export type { MIAAllowanceSheet } from "./MIAAllowanceSheet";
+export type { MIABalanceSheet } from "./MIABalanceSheet";
+export type { MIALedger } from "./MIALedger";
+export type { MIATokenV0 } from "./MIATokenV0";
 
 export { Ownable__factory } from "./factories/Ownable__factory";
 export { Proxy__factory } from "./factories/Proxy__factory";
@@ -25,12 +20,7 @@ export { TransparentUpgradeableProxy__factory } from "./factories/TransparentUpg
 export { UpgradeableProxy__factory } from "./factories/UpgradeableProxy__factory";
 export { ERC20__factory } from "./factories/ERC20__factory";
 export { IERC20__factory } from "./factories/IERC20__factory";
-export { MIA__factory } from "./factories/MIA__factory";
-export { MIAAdminProxy__factory } from "./factories/MIAAdminProxy__factory";
-export { MIALogicV0__factory } from "./factories/MIALogicV0__factory";
-export { MIATransparentUpgradableProxy__factory } from "./factories/MIATransparentUpgradableProxy__factory";
-export { Ownable__factory } from "./factories/Ownable__factory";
-export { Registry__factory } from "./factories/Registry__factory";
-export { Storage__factory } from "./factories/Storage__factory";
-export { TokenV0__factory } from "./factories/TokenV0__factory";
-export { TokenV1__factory } from "./factories/TokenV1__factory";
+export { MIAAllowanceSheet__factory } from "./factories/MIAAllowanceSheet__factory";
+export { MIABalanceSheet__factory } from "./factories/MIABalanceSheet__factory";
+export { MIALedger__factory } from "./factories/MIALedger__factory";
+export { MIATokenV0__factory } from "./factories/MIATokenV0__factory";
