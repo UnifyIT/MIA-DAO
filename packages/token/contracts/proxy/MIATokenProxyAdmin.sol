@@ -3,6 +3,6 @@ pragma solidity ^0.7.0;
 
 import "@openzeppelin/contracts/proxy/ProxyAdmin.sol";
 
-contract MIAProxyAdmin is ProxyAdmin {
+contract MIATokenProxyAdmin is ProxyAdmin {
   
 }

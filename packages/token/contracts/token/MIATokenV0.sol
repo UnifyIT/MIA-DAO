@@ -1,115 +1,128 @@
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.7.0;
 
-// import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-// import "../erc20/MIA_ERC20.sol";
 import "@openzeppelin/contracts/proxy/Initializable.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/math/SafeMath.sol";
-import "hardhat/console.sol";
 
+import "./MIATokenOwnable.sol";
 import "../ledger/MIATokenLedger.sol";
 
-contract MIATokenV0 is Initializable, MIATokenLedger, Ownable {
+
+contract MIATokenV0 is MIATokenLedger, Initializable, MIATokenOwnable {
   using SafeMath for uint256;
   // Private Token State variables;
   string private _name;
   string private _symbol;
   uint8 private _decimals;
-  address private _ledger;
 
   // Events 
   event Mint(address indexed to, uint256 value);
-  event Burn(address indexed burner, uint256 value);
   event Transfer(address indexed from, address indexed to, uint256 value);
   event Approval(address indexed owner, address indexed spender, uint256 value);
-
-  // Public Functions
-  // function initialize() should: 
-  // - Instanciate ERC20 to have name and symbol
-  // - Instanciate MIALedger with addreses of MIAAllowanceSheet & MIABalanceSheet
-  function initialize(string memory name_, string memory symbol_, uint8 decimals_, address ledger_) public initializer {
-  // function initialize(uint8 _decimals, string memory _string) public initializer {
-    console.log("START***********MIATokenV0.sol");
-    console.log("INITIALIZE IS SUCCESS");
-    console.log("string memory name_", name_);
-    console.log("string memory symbol_", symbol_);
-    console.log("uint8 decimals_", decimals_);
-    console.log("address ledger_", ledger_);
-    console.log("totalSupply", totalSupply);    
-    // Is it necessary to instanciate the ledger inside this function 
-    // how do i connect this token to the already deployed ledger?.
+  event Burn(address indexed burner, uint256 value);
+  
+  function initialize(string memory name_, string memory symbol_, uint8 decimals_) public initializer {
     _name = name_;
     _symbol = symbol_;
     _decimals = decimals_;
-    _ledger = ledger_;
-    console.log("END***********MIATokenV0.sol");
+    MIATokenOwnable.initializeOwner();
+    _mint(_msgSender(), 1000*1000);
   }
   
+  // Getter functions
   function name() public view returns (string memory) {
-      return _name;
+    return _name;
   }
 
   function symbol() public view returns (string memory) {
-      return _symbol;
+    return _symbol;
   }
 
   function decimals() public view returns (uint8) {
-      return _decimals;
+    return _decimals;
   }
   
-  function mint(address _to, uint256 _amount) public onlyOwner {
-    return _mint(_to, _amount);
+  function totalSupply() public view returns (uint256) {
+    return _totalSupply;
   }
   
-  function burn(uint256 _amount) public onlyOwner {
-    return _burn(_amount);
+  function balanceOf(address account) public view returns (uint256) {
+    return _balances[account];
   }
   
-  function approve(uint256 _amount) public onlyOwner returns(bool) {
-    console.log("approve(uint256 _amount)", _amount);
-    // approve logic thru MIALedger
-    return true;
-  }
-  
-  function transfer(address _to, uint256 _amount) public onlyOwner returns(bool) {
-    console.log("transfer(address _to, uint256 _amount)");
-    console.log("address _to", _to);
-    console.log("uint256 _amount", _amount);
-    // transfer logic thru MIALedger
-    return true;
-  }
-  
-  function transferFrom(address _to, uint256 _amount) public onlyOwner returns(bool) {
-    console.log("transferFrom(address _to, uint256 _amount)");
-    console.log("address _to", _to);
-    console.log("uint256 _amount", _amount);
-    // transferFrom logic thru MIALedger
-    return true;
-  }
-  
-  function allowance(address owner, address spender) public view returns(uint256) {
-    console.log("allowance(address owner, address spender)");
-    console.log("address owner", owner);
-    console.log("address spender", spender);
-    return allowances[owner][spender];
-  }
-  
-  function balanceOf(address account) public virtual view returns (uint256) {
-      return balances[account];
+  function allowance(address owner, address spender) public view returns (uint256) {
+    return _allowances[owner][spender];
   }
 
+  // Action functions
+
+  function transfer(address recipient, uint256 amount) public returns(bool) {
+    _transfer(_msgSender(), recipient, amount);
+    return true;
+  }
+  
+  // approve logic thru MIALedger
+  function approve(address spender, uint256 amount) public returns (bool) {
+    _approve(_msgSender(), spender, amount);
+    return true;
+  }
+  
+  function transferFrom(address sender, address recipient, uint256 amount) public virtual returns (bool) {
+    _transfer(sender, recipient, amount);
+    uint256 approveAmount = _allowances[sender][_msgSender()].sub(amount, "ERC20: transfer amount exceeds allowance");
+    _approve(sender, _msgSender(), approveAmount);
+    return true;
+  }
+  
+  function increaseAllowance(address spender, uint256 addedValue) public returns (bool) {
+    addAllowance(_msgSender(), spender, addedValue);
+    return true;
+  }
+
+  function decreaseAllowance(address spender, uint256 subtractedValue) public returns (bool) {
+    subtractAllowance(_msgSender(), spender, subtractedValue);
+    return true;
+  }
 
   // Internal Functions
-  function _mint(address _to, uint256 _amount) internal {
-    console.log("_mint(address _to, uint256 _amount)");
-    console.log("address _to", _to);
-    console.log("uint256 _amount", _amount);
-    
+  function _transfer(address sender, address recipient, uint256 amount) internal returns(bool) {
+    require(sender != address(0), "ERC20: transfer from the zero address");
+    require(recipient != address(0), "ERC20: transfer to the zero address");
+    _beforeTokenTransfer(sender, recipient, amount);
+    subtractBalance(sender, amount);
+    addBalance(recipient, amount);
+    emit Transfer(sender, recipient, amount);
   }
 
-  function _burn(uint256 _amount) internal {
-    console.log("_burn(uint256 _amount)", _amount);
+  function _mint(address account, uint256 amount) internal {
+    require(account != address(0), "ERC20: mint to the zero address");
+    _beforeTokenTransfer(address(0), account, amount);
+    addTotalSupply(amount);
+    addBalance(account, amount);
+    emit Mint(account, amount);
+    emit Transfer(address(0), account, amount);
   }
+
+  function _burn(address account, uint256 amount) internal {
+    require(account != address(0), "ERC20: burn from the zero address");
+    _beforeTokenTransfer(account, address(0), amount);
+    subtractBalance(account, amount);
+    subtractTotalSupply(amount);
+    emit Burn(account, amount);
+    emit Transfer(account, address(0), amount);
+  }
+
+  function _approve(address owner, address spender, uint256 amount) internal {
+    require(_msgSender() != address(0), "ERC20: approve from the zero address");
+    require(spender != address(0), "ERC20: approve to the zero address");
+    setAllowance(owner, spender, amount);
+    emit Approval(owner, spender, amount);
+  }
+
+  function _setupDecimals(uint8 decimals_) internal {
+    _decimals = decimals_;
+  }
+
+  function _beforeTokenTransfer(address from, address to, uint256 amount) internal { }
 
 }
