@@ -9,10 +9,12 @@
 
 // export const ProxyAdmin = {}
 
-export const MIALogic = require("../artifacts/contracts/mj-implementation/MIALogicV0.sol/MIALogicV0.json")
+export const MIATokenV0 = require("../artifacts/contracts/token/MIATokenV0.sol/MIATokenV0.json");
+export const MIATokenV0ABI = MIATokenV0.abi;
+// export const MIALogic = require("../artifacts/contracts/mj-implementation/MIALogicV0.sol/MIALogicV0.json")
 
-export const AdminProxy = require("../artifacts/@openzeppelin/contracts/proxy/ProxyAdmin.sol/ProxyAdmin.json")
-export const TransparentUpgradeableProxy = require("../artifacts/@openzeppelin/contracts/proxy/TransparentUpgradeableProxy.sol/TransparentUpgradeableProxy.json")
+// export const AdminProxy = require("../artifacts/@openzeppelin/contracts/proxy/ProxyAdmin.sol/ProxyAdmin.json")
+// export const TransparentUpgradeableProxy = require("../artifacts/@openzeppelin/contracts/proxy/TransparentUpgradeableProxy.sol/TransparentUpgradeableProxy.json")
 
-export const AdminProxyABI = require("../artifacts/@openzeppelin/contracts/proxy/ProxyAdmin.sol/ProxyAdmin.json").abi
-export const TransparentUpgradeableProxyABI = require("../artifacts/@openzeppelin/contracts/proxy/TransparentUpgradeableProxy.sol/TransparentUpgradeableProxy.json").abi
+// export const AdminProxyABI = require("../artifacts/@openzeppelin/contracts/proxy/ProxyAdmin.sol/ProxyAdmin.json").abi
+// export const TransparentUpgradeableProxyABI = require("../artifacts/@openzeppelin/contracts/proxy/TransparentUpgradeableProxy.sol/TransparentUpgradeableProxy.json").abi

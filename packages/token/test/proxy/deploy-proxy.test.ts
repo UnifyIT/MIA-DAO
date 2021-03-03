@@ -1,42 +1,52 @@
 import hre from "hardhat";
 
+import { MIATokenV0ABI } from "../../abis";
+
 const { ethers } = hre;
 
+
 // Deploy in this order:
-// MIA AllowanceSheet
-// MIA BalanceSheet
 // MIA Ledger/Storage(BalanceSheet, AllowanceSheet)
 // MIA TokenV0Logic Contact(MIA_Storage_logic)
 // MIA ProxyAdmin Contract
 // MIA TransparentUpgradeableProxy Contract
 
 describe("MIA Admin Proxy contract", function() {
-  
   before("Deploy prequisite contracts first", async function() {
-      try {
-        const MIAAllowanceSheet = await ethers.getContractFactory("MIAAllowanceSheet");
-        const MIABalanceSheet = await ethers.getContractFactory("MIABalanceSheet");
+    try {
+      const MIATokenLedger = await ethers.getContractFactory("MIATokenLedger");
+      const miaTokenLedger = await MIATokenLedger.deploy();
+      const { address: miaTokenLedgerAddress } = miaTokenLedger;
+      console.log("MIATokenLedger address: ", miaTokenLedgerAddress);
+            
+      const MIATokenV0 = await ethers.getContractFactory("MIATokenV0");
+      const miaTokenV0 = await MIATokenV0.deploy();
+      const { address: miaTokenV0Address, callStatic } = miaTokenV0;
+      console.log("MIATokenV0 address: ", miaTokenV0Address);
+      // console.log("callStatic", callStatic)
+      console.log('miaTokenV0.totalSupply()', await miaTokenV0.totalSupply());
+      const MIAProxyAdmin = await ethers.getContractFactory("ProxyAdmin");
+      const miaProxyAdmin = await MIAProxyAdmin.deploy();
+      const { address: miaProxyAdminAddress } = miaProxyAdmin
+      console.log("MIAProxyAdmin address: ", miaProxyAdminAddress);
       
-        const miaAllowanceSheet = await MIAAllowanceSheet.deploy();
-        const miaBalanceSheet = await MIABalanceSheet.deploy();
+      const abi = MIATokenV0ABI
+      const abiInterface = new ethers.utils.Interface(abi);
+      const functionToCall = "initialize";
+      const parameters = ["MIA DAO", "MIA", 6, miaTokenLedgerAddress]
+      const bytes = abiInterface.encodeFunctionData(functionToCall, parameters)
+      console.log("bytes", bytes);
       
-        const { address: allowanceSheetAddress } = miaAllowanceSheet;
-        const { address: balanceSheetAddress } = miaBalanceSheet;
+      const MIATransparentUpgradableProxy = await hre.ethers.getContractFactory("TransparentUpgradeableProxy");
+      const miaTransparentUpgradableProxy = await MIATransparentUpgradableProxy.deploy(miaTokenV0Address, miaProxyAdminAddress, bytes);
+      const { address: miaTransparentUpgradableProxyAddress } = miaTransparentUpgradableProxy;
+      console.log("MIATransparentUpgradableProxy address: ", miaTransparentUpgradableProxyAddress);
       
-        const MIATokenV0 = await ethers.getContractFactory("MIATokenV0");
-        const miaTokenV0 = await MIATokenV0.deploy();
-      
-        const { address: miaTokenV0Address } = miaTokenV0;
-
-        console.log("MIAAllowanceSheet address: ", allowanceSheetAddress);
-        console.log("MIABalanceSheet address: ", balanceSheetAddress );
-        console.log("MIATokenV0 address: ", miaTokenV0Address);
-  
-      } catch (error) {
-        console.log("error in before", error);
-      }
+    } catch (error) {
+      console.log("error in before", error);
+    }
   });
-  
+
   it("Should deploy MIA Proxy", async function() {
     try {
       
