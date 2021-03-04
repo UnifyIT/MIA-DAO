@@ -57,6 +57,8 @@ contract MIATokenV0 is MIATokenLedger, Initializable, MIATokenOwnable {
   // Action functions
 
   function transfer(address recipient, uint256 amount) public returns(bool) {
+    require(recipient != address(0),"to address cannot be 0x0");
+    require(amount <= balanceOf(msg.sender),"not enough balance to transfer");
     _transfer(_msgSender(), recipient, amount);
     return true;
   }
@@ -68,6 +70,9 @@ contract MIATokenV0 is MIATokenLedger, Initializable, MIATokenOwnable {
   }
   
   function transferFrom(address sender, address recipient, uint256 amount) public virtual returns (bool) {
+    require(amount <= allowance(msg.sender, recipient),"not enough allowance to transfer");
+    require(recipient != address(0),"to address cannot be 0x0");
+    require(amount <= balanceOf(msg.sender), "not enough balance to transfer");
     _transfer(sender, recipient, amount);
     uint256 approveAmount = _allowances[sender][_msgSender()].sub(amount, "ERC20: transfer amount exceeds allowance");
     _approve(sender, _msgSender(), approveAmount);
@@ -105,6 +110,7 @@ contract MIATokenV0 is MIATokenLedger, Initializable, MIATokenOwnable {
 
   function _burn(address account, uint256 amount) internal {
     require(account != address(0), "ERC20: burn from the zero address");
+    require(amount <= balanceOf(account),"not enough balance to burn");
     _beforeTokenTransfer(account, address(0), amount);
     subtractBalance(account, amount);
     subtractTotalSupply(amount);
