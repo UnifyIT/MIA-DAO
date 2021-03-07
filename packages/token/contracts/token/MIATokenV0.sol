@@ -76,6 +76,7 @@ contract MIATokenV0 is MIATokenLedger, Initializable, MIATokenOwnable {
     require(recipient != address(0),"to address cannot be 0x0");
     require(amount <= balanceOf(msg.sender), "not enough balance to transfer");
     _transfer(sender, recipient, amount);
+    console.log("_allowances[sender][_msgSender()]", _allowances[sender][_msgSender()]);
     uint256 approveAmount = _allowances[sender][_msgSender()].sub(amount, "ERC20: transfer amount exceeds allowance");
     _approve(sender, _msgSender(), approveAmount);
     return true;

@@ -48,15 +48,11 @@ describe("MIA Admin Proxy contract", function() {
       const MIATokenProxy = await ethers.getContractFactory("MIATokenProxy");
       const { miaTokenV0Address, miaProxyAdminAddress, bytes, abi } = this
       this.MIATokenProxy = await MIATokenProxy.deploy(miaTokenV0Address, miaProxyAdminAddress, bytes);
-      const { address } = this.MIATokenProxy;
-      // this.miaTokenProxyAddress = address;
-      
+      const { address } = this.MIATokenProxy;      
+
+      this.MIATokenProxy = await ethers.getContractAt(abi, address);
       this.owner = await this.MIATokenProxy.owner();
-      console.log("this.owner", this.owner);
-      this.MIATokenProxy = await ethers.getContractAt(abi, this.miaTokenV0Address);
-      
-      const { callStatic } = this.MIATokenProxy;
-      console.log('callStatic', callStatic);
+
       expect(address).to.exist;
     } catch (error) {
       console.log("error Should deploy MIA Proxy", error);
@@ -64,28 +60,34 @@ describe("MIA Admin Proxy contract", function() {
   })
   it(`Should totalSupply be 10000000 totalSupply: ${1000*1000}`, async function() {
     try {
-      // expect(await this.MIATokenProxy.totalSupply()).equals(1000*1000);
+      this.totalSupply = await this.MIATokenProxy.totalSupply();
+      expect(Number(this.totalSupply)).equals(1000*1000);
     } catch (error) {
       console.log("error hould have totalSupply: ${this.totalSupply", error);
     }
   });
 
   it("Should approve 10,000 tokens", async function() {
-    // const approved = await this.MIATokenProxy.approve(this.spender, 1000*10);
-    // console.log("approved", approved);
-    // expect(approved).to.be.true;
+    const approved = await this.MIATokenProxy.approve(this.spender, 1000*10);
+    expect(approved).to.exist;
   });
   
   it("Should allowance 10,000", async function(){
-    // console.log("await this.MIAProxyToken.allowace()", await this.MIATokenProxy.allowance(this.owner, this.spender));
+    const allowance = await this.MIATokenProxy.allowance(this.owner, this.spender);
+    console.log('Number(allowance)', Number(allowance))
+    expect(Number(allowance)).to.equals(1000*10);
   });
   
   it("Should trasfer tokens", async function() {
-    // this.MIATokenProxy.transfer("0x5Db06acd673531218B10430bA6dE9b69913Ad545", 1000*10);
-    // const previousTotalSupply = 1000*1000
-    // const currentTotalSupply = await this.MIATokenProxy.totalSupply();
-    // console.log("currentTotalSupply", currentTotalSupply);
-    // expect(currentTotalSupply).to.equals(previousTotalSupply - 1000*10)
+    try {
+      await this.MIATokenProxy.transferFrom(this.owner, "0x5Db06acd673531218B10430bA6dE9b69913Ad545", 100*10);
+      const balanceOf = Number((await this.MIATokenProxy.balanceOf("0x5Db06acd673531218B10430bA6dE9b69913Ad545")));
+      const balanceOfProxy = Number(await this.MIATokenProxy.balanceOf(this.owner));
+      console.log("balanceOfProxy", balanceOfProxy)
+      expect(balanceOf).to.equals(100*10)
+    } catch (error) {
+      console.log("error in Should trasfer tokens", error);
+    }
   })
 
 })
