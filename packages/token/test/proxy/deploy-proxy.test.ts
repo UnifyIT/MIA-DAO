@@ -17,49 +17,89 @@ describe("MIA Admin Proxy contract", function() {
     try {
       const MIATokenLedger = await ethers.getContractFactory("MIATokenLedger");
       const miaTokenLedger = await MIATokenLedger.deploy();
-      const { address: miaTokenLedgerAddress } = miaTokenLedger;
-      console.log("MIATokenLedger address: ", miaTokenLedgerAddress);
+      // const { address: miaTokenLedgerAddress } = miaTokenLedger;
       const MIATokenV0 = await ethers.getContractFactory("MIATokenV0");
       const miaTokenV0 = await MIATokenV0.deploy();
-      const { address: miaTokenV0Address, callStatic } = miaTokenV0;
-      console.log("MIATokenV0 address: ", miaTokenV0Address);
-      console.log('miaTokenV0.totalSupply()', await miaTokenV0.totalSupply());
+      const { 
+        address: miaTokenV0Address, 
+      } = miaTokenV0;
+      this.miaTokenV0Address = miaTokenV0Address;
       const MIAProxyAdmin = await ethers.getContractFactory("MIATokenProxyAdmin");
       const miaProxyAdmin = await MIAProxyAdmin.deploy();
       const { address: miaProxyAdminAddress } = miaProxyAdmin
-      console.log("MIAProxyAdmin address: ", miaProxyAdminAddress);
+      this.miaProxyAdminAddress = miaProxyAdminAddress;
       
       const abi = MIATokenV0ABI
+      this.abi = abi;
       const abiInterface = new ethers.utils.Interface(abi);
       const functionToCall = "initialize";
-      const parameters = ["MIA DAO", "MIA", 6]
-      const bytes = abiInterface.encodeFunctionData(functionToCall, parameters)
-      // console.log("bytes", bytes);
+      this.totalSupply = 1000*1000
+      const parameters = ["MIA DAO", "MIA", 6, this.totalSupply];
+      this.bytes = abiInterface.encodeFunctionData(functionToCall, parameters);
+      this.spender = "0x5Db06acd673531218B10430bA6dE9b69913Ad545";
 
-      const MIATokenProxy = await ethers.getContractFactory("MIATokenProxy");
-      const miaTokenProxy = await MIATokenProxy.deploy(miaTokenV0Address, miaProxyAdminAddress, bytes);
-      // console.log('await miaTokenProxy.owner()', await miaTokenProxy.owner())
-      const { address: miaTokenProxyAddress } = miaTokenProxy
-      this.miaTokenProxyAddress = miaTokenProxyAddress;
-      console.log("MIATransparentUpgradableProxy address: ", this.miaTokenProxyAddress);
-      expect(miaTokenProxyAddress).to.exist;
     } catch (error) {
       console.log("error in before", error);
     }
-  });
+  })
 
   it("Should deploy MIATokenProxy with MIATokenV0ABI & MIATokenProxy address", async function() {
-    try {
-      const abi = MIATokenV0ABI
-      const MIAProxyToken = await ethers.getContractAt(abi, this.miaTokenProxyAddress);
-      // console.log('this.miaTokenProxyAddress', this.miaTokenProxyAddress);
-      // console.log("MIAProxyToken.callStatic", MIAProxyToken.callStatic);
-      console.log('await MIAProxyToken.totalSupply()', Number(await MIAProxyToken.totalSupply()))
-      console.log('await MIAProxyToken.owner()', await MIAProxyToken.owner());
-      expect(MIAProxyToken.address).to.exist;
+    try {  
+      const MIATokenProxy = await ethers.getContractFactory("MIATokenProxy");
+      const { miaTokenV0Address, miaProxyAdminAddress, bytes, abi } = this
+      this.MIATokenProxy = await MIATokenProxy.deploy(miaTokenV0Address, miaProxyAdminAddress, bytes);
+      const { address } = this.MIATokenProxy;
+      // this.miaTokenProxyAddress = address;
+      
+      this.owner = await this.MIATokenProxy.owner();
+      console.log("this.owner", this.owner);
+      this.MIATokenProxy = await ethers.getContractAt(abi, this.miaTokenV0Address);
+      
+      const { callStatic } = this.MIATokenProxy;
+      console.log('callStatic', callStatic);
+      expect(address).to.exist;
     } catch (error) {
       console.log("error Should deploy MIA Proxy", error);
     }
   })
+  it(`Should totalSupply be 10000000 totalSupply: ${1000*1000}`, async function() {
+    try {
+      // expect(await this.MIATokenProxy.totalSupply()).equals(1000*1000);
+    } catch (error) {
+      console.log("error hould have totalSupply: ${this.totalSupply", error);
+    }
+  });
+
+  it("Should approve 10,000 tokens", async function() {
+    // const approved = await this.MIATokenProxy.approve(this.spender, 1000*10);
+    // console.log("approved", approved);
+    // expect(approved).to.be.true;
+  });
+  
+  it("Should allowance 10,000", async function(){
+    // console.log("await this.MIAProxyToken.allowace()", await this.MIATokenProxy.allowance(this.owner, this.spender));
+  });
+  
+  it("Should trasfer tokens", async function() {
+    // this.MIATokenProxy.transfer("0x5Db06acd673531218B10430bA6dE9b69913Ad545", 1000*10);
+    // const previousTotalSupply = 1000*1000
+    // const currentTotalSupply = await this.MIATokenProxy.totalSupply();
+    // console.log("currentTotalSupply", currentTotalSupply);
+    // expect(currentTotalSupply).to.equals(previousTotalSupply - 1000*10)
+  })
 
 })
+
+
+// it("Should deploy MIATokenProxy with MIATokenV0ABI & MIATokenProxy address", async function() {
+//   try {  
+//     // console.log('this.miaTokenProxyAddress', this.miaTokenProxyAddress);
+//     // console.log("MIAProxyToken.callStatic", MIAProxyToken.callStatic);
+//     console.log('await MIAProxyToken.totalSupply()', Number(await this.MIAProxyToken.totalSupply()))
+//     console.log('await MIAProxyToken.owner()', await this.MIAProxyToken.owner());
+//     const { address: MIAProxy } = this.MIAProxyToken.
+//     expect(address).to.exist;
+//   } catch (error) {
+//     console.log("error Should deploy MIA Proxy", error);
+//   }
+// })

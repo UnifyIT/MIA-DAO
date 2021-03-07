@@ -3,6 +3,7 @@ pragma solidity ^0.7.0;
 
 import "@openzeppelin/contracts/proxy/Initializable.sol";
 import "@openzeppelin/contracts/math/SafeMath.sol";
+import "hardhat/console.sol";
 
 import "./MIATokenOwnable.sol";
 import "../ledger/MIATokenLedger.sol";
@@ -21,12 +22,12 @@ contract MIATokenV0 is MIATokenLedger, Initializable, MIATokenOwnable {
   event Approval(address indexed owner, address indexed spender, uint256 value);
   event Burn(address indexed burner, uint256 value);
   
-  function initialize(string memory name_, string memory symbol_, uint8 decimals_) public initializer {
+  function initialize(string memory name_, string memory symbol_, uint8 decimals_, uint256 totalSupply) public initializer {
     _name = name_;
     _symbol = symbol_;
     _decimals = decimals_;
     MIATokenOwnable.initializeOwner();
-    _mint(_msgSender(), 1000*1000);
+    _mint(_msgSender(), totalSupply);
   }
   
   // Getter functions
@@ -43,6 +44,7 @@ contract MIATokenV0 is MIATokenLedger, Initializable, MIATokenOwnable {
   }
   
   function totalSupply() public view returns (uint256) {
+    console.log(_totalSupply);
     return _totalSupply;
   }
   
@@ -99,13 +101,13 @@ contract MIATokenV0 is MIATokenLedger, Initializable, MIATokenOwnable {
     emit Transfer(sender, recipient, amount);
   }
 
-  function _mint(address account, uint256 amount) internal {
-    require(account != address(0), "ERC20: mint to the zero address");
-    _beforeTokenTransfer(address(0), account, amount);
+  function _mint(address recipient, uint256 amount) internal onlyOwner {
+    require(recipient != address(0), "ERC20: mint to the zero address");
+    _beforeTokenTransfer(address(0), recipient, amount);
     addTotalSupply(amount);
-    addBalance(account, amount);
-    emit Mint(account, amount);
-    emit Transfer(address(0), account, amount);
+    addBalance(recipient, amount);
+    emit Mint(recipient, amount);
+    emit Transfer(address(0), recipient, amount);
   }
 
   function _burn(address account, uint256 amount) internal {
