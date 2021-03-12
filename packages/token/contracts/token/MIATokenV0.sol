@@ -5,11 +5,11 @@ import "@openzeppelin/contracts/proxy/Initializable.sol";
 import "@openzeppelin/contracts/math/SafeMath.sol";
 import "hardhat/console.sol";
 
-import "./MIATokenOwnable.sol";
+
 import "../ledger/MIATokenLedger.sol";
 
 
-contract MIATokenV0 is MIATokenLedger, Initializable, MIATokenOwnable {
+contract MIATokenV0 is MIATokenLedger, Initializable {
   using SafeMath for uint256;
   // Private Token State variables;
   string private _name;
@@ -44,7 +44,6 @@ contract MIATokenV0 is MIATokenLedger, Initializable, MIATokenOwnable {
   }
   
   function totalSupply() public view returns (uint256) {
-    console.log(_totalSupply);
     return _totalSupply;
   }
   
@@ -59,8 +58,8 @@ contract MIATokenV0 is MIATokenLedger, Initializable, MIATokenOwnable {
   // Action functions
 
   function transfer(address recipient, uint256 amount) public returns(bool) {
-    require(recipient != address(0),"to address cannot be 0x0");
-    require(amount <= balanceOf(msg.sender),"not enough balance to transfer");
+    require(recipient != address(0), "to address cannot be 0x0");
+    require(amount <= balanceOf(_msgSender()), "not enough balance to transfer");
     _transfer(_msgSender(), recipient, amount);
     return true;
   }
@@ -72,15 +71,15 @@ contract MIATokenV0 is MIATokenLedger, Initializable, MIATokenOwnable {
   }
   
   function transferFrom(address sender, address recipient, uint256 amount) public virtual returns (bool) {
-    require(amount <= allowance(msg.sender, recipient),"not enough allowance to transfer");
-    require(recipient != address(0),"to address cannot be 0x0");
-    require(amount <= balanceOf(msg.sender), "not enough balance to transfer");
+    require(amount <= allowance(_msgSender(), recipient), "not enough allowance to transfer");
+    require(recipient != address(0), "to address cannot be 0x0");
+    require(amount <= balanceOf(_msgSender()), "not enough balance to transfer");
     _transfer(sender, recipient, amount);
-    console.log("_allowances[sender][_msgSender()]", _allowances[sender][_msgSender()]);
-    uint256 approveAmount = _allowances[sender][_msgSender()].sub(amount, "ERC20: transfer amount exceeds allowance");
+    uint256 approveAmount = _allowances[sender][recipient].sub(amount, "ERC20: transfer amount exceeds allowance");
     _approve(sender, _msgSender(), approveAmount);
     return true;
   }
+  
   
   function increaseAllowance(address spender, uint256 addedValue) public returns (bool) {
     addAllowance(_msgSender(), spender, addedValue);
@@ -113,7 +112,7 @@ contract MIATokenV0 is MIATokenLedger, Initializable, MIATokenOwnable {
 
   function _burn(address account, uint256 amount) internal {
     require(account != address(0), "ERC20: burn from the zero address");
-    require(amount <= balanceOf(account),"not enough balance to burn");
+    require(amount <= balanceOf(account), "not enough balance to burn");
     _beforeTokenTransfer(account, address(0), amount);
     subtractBalance(account, amount);
     subtractTotalSupply(amount);

@@ -5,7 +5,7 @@ import open from "open";
 import utils from "../../utils";
 
 const { writeFileSync } = utils;
-import { MIA_V0, MIA_V0_ABI } from "../../../abis";
+import { MIATokenV0, MIATokenV0ABI } from "../../../abis";
 
 async function V0() {
   let fileObject: any = {}

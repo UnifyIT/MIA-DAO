@@ -1,20 +1,14 @@
-// export const MIA_V0 = require("../artifacts/contracts/MIA_V0.sol/MIA_V0.json")
-// export const MIA_V0_ABI = MIA_V0.abi;
+import MIATokenV0 from "../artifacts/contracts/token/MIATokenV0.sol/MIATokenV0.json";
+import MIATokenV1 from "../artifacts/contracts/token/MIATokenV1.sol/MIATokenV1.json";
+import MIATokenProxy from "../artifacts/contracts/proxy/MIATokenProxy.sol/MIATokenProxy.json";
 
-// export const MIA_AllowanceSheet = require("../artifacts/contracts/storage/MIA_AllowanceSheet.sol/MIA_AllowanceSheet.json").abi;
-// export const MIA_BalanceSheet = require("../artifacts/contracts/storage/MIA_BalanceSheet.sol/MIA_BalanceSheet.json").abi;
-// export const MIA_TokenProxy = require("../artifacts/contracts/proxy/MIA_TokenProxy.sol/MIA_TokenProxy.json").abi;
 
-// export const TokenV0 = require("../artifacts/contracts/upgradable-pattern/TokenV0.sol/TokenV0.json").abi;
-
-// export const ProxyAdmin = {}
-
-export const MIATokenV0 = require("../artifacts/contracts/token/MIATokenV0.sol/MIATokenV0.json");
 export const MIATokenV0ABI = MIATokenV0.abi;
-// export const MIALogic = require("../artifacts/contracts/mj-implementation/MIALogicV0.sol/MIALogicV0.json")
+export const MIATokenV1ABI = MIATokenV1.abi;
+export const MIATokenProxyABI = MIATokenProxy.abi;
 
-// export const AdminProxy = require("../artifacts/@openzeppelin/contracts/proxy/ProxyAdmin.sol/ProxyAdmin.json")
-// export const TransparentUpgradeableProxy = require("../artifacts/@openzeppelin/contracts/proxy/TransparentUpgradeableProxy.sol/TransparentUpgradeableProxy.json")
-
-// export const AdminProxyABI = require("../artifacts/@openzeppelin/contracts/proxy/ProxyAdmin.sol/ProxyAdmin.json").abi
-// export const TransparentUpgradeableProxyABI = require("../artifacts/@openzeppelin/contracts/proxy/TransparentUpgradeableProxy.sol/TransparentUpgradeableProxy.json").abi
+export {
+  MIATokenV0,
+  MIATokenV1,
+  MIATokenProxy,
+}
