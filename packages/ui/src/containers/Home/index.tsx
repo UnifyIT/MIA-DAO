@@ -23,10 +23,10 @@ function Home() {
     const mia: any = await MIA.getInstance();
     const address = await mia.userAddress();
     const contractAddress = await mia.contractAddress();
-    let balance = await mia.userBalance();
-    balance = balance.div(1e6).toNumber();
+    // let balance = await mia.userBalance();
+    // balance = balance.div(1e6).toNumber();
     setAddress(address);
-    setBalance(balance);
+    // setBalance(balance);
     setMiaContractAddress(contractAddress);
   }
 
@@ -34,12 +34,10 @@ function Home() {
 
   return (
     <div className="Home">
-        <p>
-          <Chip
-            label="MIA TOKEN TESTER UI"
-            color="primary"
-          />
-        </p>
+        <Chip
+          label="MIA TOKEN TESTER UI"
+          color="primary"
+        />
         <ContractInfo address={miaContractAddress} />
         <AccountInfo balance={balance} address={address}/>
         <Transfer />
