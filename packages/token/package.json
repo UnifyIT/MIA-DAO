@@ -24,11 +24,15 @@
     "typechain": "^4.0.1",
     "typescript": "^4.1.4"
   },
+  "devDependencies": {
+    "solhint": "^3.3.4"
+  },
   "scripts": {
     "compile": "npx hardhat compile",
     "deploy": "yarn deploy:proxy:rinkeby",
     "deploy:proxy:rinkeby": "npx hardhat run scripts/deploy/proxy/deploy.ts --network rinkeby",
     "test": "yarn test:proxy",
-    "test:proxy": "npx hardhat test test/proxy/deploy-proxy.test.ts"
+    "test:proxy": "npx hardhat test test/proxy/deploy-proxy.test.ts",
+    "solhint": "./node_modules/.bin/solhint -f table contracts/**/*.sol"
   }
 }

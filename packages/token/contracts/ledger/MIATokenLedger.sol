@@ -34,10 +34,6 @@ contract MIATokenLedger is MIATokenOwnable {
     _balances[user] = _balances[user].sub(amount, "ERC20: transfer amount exceeds balance"); 
   }
   
-  // function setBalance(address user, uint256 amount) internal {
-  //   _balances[user] = amount;
-  // }
-  // 
   function addTotalSupply(uint256 amount) internal {
     _totalSupply = _totalSupply.add(amount);
   }
@@ -46,8 +42,5 @@ contract MIATokenLedger is MIATokenOwnable {
     _totalSupply = _totalSupply.sub(amount);
   }
 
-  // function setTotalSupply(uint256 amount) internal {
-  //   _totalSupply = amount;
-  // }
   
 }

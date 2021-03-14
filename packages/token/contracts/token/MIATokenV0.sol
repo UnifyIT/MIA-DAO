@@ -101,7 +101,7 @@ contract MIATokenV0 is MIATokenLedger, Initializable {
     emit Transfer(sender, recipient, amount);
   }
 
-  function _mint(address recipient, uint256 amount) internal onlyOwner {
+  function _mint(address recipient, uint256 amount) internal onlyOwner virtual {
     require(recipient != address(0), "ERC20: mint to the zero address");
     _beforeTokenTransfer(address(0), recipient, amount);
     addTotalSupply(amount);
@@ -110,7 +110,7 @@ contract MIATokenV0 is MIATokenLedger, Initializable {
     emit Transfer(address(0), recipient, amount);
   }
 
-  function _burn(address account, uint256 amount) internal {
+  function _burn(address account, uint256 amount) internal virtual {
     require(account != address(0), "ERC20: burn from the zero address");
     require(amount <= balanceOf(account), "not enough balance to burn");
     _beforeTokenTransfer(account, address(0), amount);
@@ -131,6 +131,6 @@ contract MIATokenV0 is MIATokenLedger, Initializable {
     _decimals = decimals_;
   }
 
-  function _beforeTokenTransfer(address from, address to, uint256 amount) internal { }
+  function _beforeTokenTransfer(address from, address to, uint256 amount) internal virtual { }
 
 }
