@@ -7,7 +7,7 @@ import "hardhat/console.sol";
 
 import "./MIATokenOwnable.sol";
 
-contract MIATokenV00 is Context, MIATokenOwnable, Initializable {
+contract MIATokenV0 is Context, MIATokenOwnable, Initializable {
     using SafeMath for uint256;
 
     mapping (address => uint256) private _balances;

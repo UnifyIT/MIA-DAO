@@ -12,7 +12,6 @@ export type { MIATokenProxy } from "./MIATokenProxy";
 export type { MIATokenProxyAdmin } from "./MIATokenProxyAdmin";
 export type { MIATokenOwnable } from "./MIATokenOwnable";
 export type { MIATokenV0 } from "./MIATokenV0";
-export type { MIATokenV00 } from "./MIATokenV00";
 export type { MIATokenV1 } from "./MIATokenV1";
 
 export { Ownable__factory } from "./factories/Ownable__factory";
@@ -26,5 +25,4 @@ export { MIATokenProxy__factory } from "./factories/MIATokenProxy__factory";
 export { MIATokenProxyAdmin__factory } from "./factories/MIATokenProxyAdmin__factory";
 export { MIATokenOwnable__factory } from "./factories/MIATokenOwnable__factory";
 export { MIATokenV0__factory } from "./factories/MIATokenV0__factory";
-export { MIATokenV00__factory } from "./factories/MIATokenV00__factory";
 export { MIATokenV1__factory } from "./factories/MIATokenV1__factory";
