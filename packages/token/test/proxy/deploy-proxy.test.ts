@@ -6,7 +6,7 @@ import { MIATokenV0ABI, MIATokenProxyABI, MIATokenV1ABI } from "../../abis";
 const { ethers } = hre;
 
 // Deploy in this order:
-// MIA TokenV0Logic inherits MIA Ledger/Storage(BalanceSheet, AllowanceSheet) Contract
+// MIA TokenV0Logic
 // MIA ProxyAdmin Contract
 // MIA TransparentUpgradeableProxy Contract
 
@@ -79,15 +79,15 @@ describe("MIA Admin Proxy contract", function() {
   });
 
   it("Should approve 10,000 tokens", async function() {
-    const approved = await this.MIATokenV0Proxy.approve(this.spender, mockTransferAmount);
+    const approved = await this.MIATokenV0Proxy.approve(this.owner, mockTransferAmount);
 
     expect(approved).to.exist;
   });
   
   it("Should allowance 10,000", async function() {
-    const allowance = await this.MIATokenV0Proxy.allowance(this.owner, this.spender);
+    const allowance = await this.MIATokenV0Proxy.allowance(this.owner, this.owner);
 
-    expect(Number(allowance)).to.equals(1000*10);
+    expect(Number(allowance)).to.equals(mockTransferAmount);
   });
   
   it("Should transferFrom tokens", async function() {

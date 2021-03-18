@@ -31,6 +31,8 @@
     "compile": "npx hardhat compile",
     "deploy": "yarn deploy:proxy:rinkeby",
     "deploy:proxy:rinkeby": "npx hardhat run scripts/deploy/proxy/deploy.ts --network rinkeby",
+    "deploy:tokenv1": "yarn deploy:tokenv1:rinkeby",
+    "deploy:tokenv1:rinkeby": "npx hardhat run scripts/deploy/proxy/deployV1.ts --network rinkeby",
     "test": "yarn test:proxy",
     "test:proxy": "npx hardhat test test/proxy/deploy-proxy.test.ts",
     "solhint": "./node_modules/.bin/solhint -f table contracts/**/*.sol",

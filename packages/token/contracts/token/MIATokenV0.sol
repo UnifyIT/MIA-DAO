@@ -3,7 +3,6 @@ pragma solidity ^0.7.0;
 
 import "@openzeppelin/contracts/math/SafeMath.sol";
 import "@openzeppelin/contracts/proxy/Initializable.sol";
-import "hardhat/console.sol";
 
 import "./MIATokenOwnable.sol";
 
@@ -76,7 +75,6 @@ contract MIATokenV0 is Context, MIATokenOwnable, Initializable {
     }
 
     function transferFrom(address sender, address recipient, uint256 amount) public virtual returns (bool) {
-        console.log("_msgSender()", _msgSender());
         _transfer(sender, recipient, amount);
         _approve(sender, _msgSender(), _allowances[sender][_msgSender()].sub(amount, "ERC20: transfer amount exceeds allowance"));
         return true;
