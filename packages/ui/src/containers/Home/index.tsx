@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { Chip } from '@material-ui/core';
 
 import {
-  AccountInfo, 
-  ContractInfo, 
+  AccountInfo,
+  ContractInfo,
   Transfer,
-
+  TransferOwnership,
+  Burn,
 } from "components";
 
 import MIA from "services/web3/mia";
@@ -22,10 +24,10 @@ function Home() {
     const mia: any = await MIA.getInstance();
     const address = await mia.userAddress();
     const contractAddress = await mia.contractAddress();
-    let balance = await mia.userBalance();
-    balance = balance.div(1e6).toNumber();
+    // let balance = await mia.userBalance();
+    // balance = balance.div(1e6).toNumber();
     setAddress(address);
-    setBalance(balance);
+    // setBalance(balance);
     setMiaContractAddress(contractAddress);
   }
 
@@ -33,12 +35,15 @@ function Home() {
 
   return (
     <div className="Home">
-        <p>
-          MIA TOKEN TESTER UI
-        </p>
+        <Chip
+          label="MIA TOKEN TESTER UI"
+          color="primary"
+        />
         <ContractInfo address={miaContractAddress} />
         <AccountInfo balance={balance} address={address}/>
         <Transfer />
+        <TransferOwnership />
+        <Burn />
     </div>
   );
 }
