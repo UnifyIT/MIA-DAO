@@ -2,6 +2,7 @@
   "name": "mia-dao",
   "license": "MIT",
   "scripts": {
+    "start": "serve packages/ui/build",
     "ui": "cd packages && cd ui && yarn start",
     "contracts:compile": "cd packages && cd token && yarn compile",
     "deploy": "yarn contracts:deploy",
@@ -9,5 +10,8 @@
     "contracts:deploy": "cd packages && cd token && yarn deploy",
     "test": "yarn contracts:test",
     "contracts:test": "cd packages && cd token && yarn test"
+  },
+  "dependencies": {
+    "serve": "^11.3.2"
   }
 }
