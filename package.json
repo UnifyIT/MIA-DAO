@@ -4,6 +4,8 @@
   "scripts": {
     "ui": "cd packages && cd ui && yarn start",
     "contracts:compile": "cd packages && cd token && yarn compile",
+    "deploy": "yarn contracts:deploy",
+    "deployv1": "cd packages && cd token && yarn deploy:tokenv1",
     "contracts:deploy": "cd packages && cd token && yarn deploy",
     "test": "yarn contracts:test",
     "contracts:test": "cd packages && cd token && yarn test"

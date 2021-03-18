@@ -5,7 +5,8 @@ import {
   AccountInfo,
   ContractInfo,
   Transfer,
-
+  TransferOwnership,
+  Burn,
 } from "components";
 
 import MIA from "services/web3/mia";
@@ -41,6 +42,8 @@ function Home() {
         <ContractInfo address={miaContractAddress} />
         <AccountInfo balance={balance} address={address}/>
         <Transfer />
+        <TransferOwnership />
+        <Burn />
     </div>
   );
 }
