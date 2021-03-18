@@ -27,7 +27,7 @@ function Burn(props: any){
           <TextField label="Amount to burn" variant="outlined" placeholder="Amount" type="number" onChange={onAmountChange} value={burnAmount}/>
           <div>
             <br></br>
-            <Button color= "primary" variant="contained">Burn</Button>
+            <Button color= "primary" variant="contained" type="submit">Burn</Button>
           </div>
       </form>
       <br></br>
