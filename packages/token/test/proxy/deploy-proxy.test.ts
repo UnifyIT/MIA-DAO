@@ -79,7 +79,7 @@ describe("MIA Admin Proxy contract", function() {
   });
 
   it("Should approve 10,000 tokens", async function() {
-    const approved = await this.MIATokenV0Proxy.approve(this.spender, 1000*10);
+    const approved = await this.MIATokenV0Proxy.approve(this.spender, mockTransferAmount);
 
     expect(approved).to.exist;
   });
@@ -92,13 +92,13 @@ describe("MIA Admin Proxy contract", function() {
   
   it("Should transferFrom tokens", async function() {
     const balanceOfProxy = Number(await this.MIATokenV0Proxy.balanceOf(this.owner));
-    const balanceOf = Number((await this.MIATokenV0Proxy.balanceOf("0x5Db06acd673531218B10430bA6dE9b69913Ad545")));
+    const balanceOf = Number((await this.MIATokenV0Proxy.balanceOf(this.spender)));
     const expectedBalanceOfProxy = balanceOfProxy - mockTransferAmount;
     
-    const transfer = await this.MIATokenV0Proxy.transferFrom(this.owner, "0x5Db06acd673531218B10430bA6dE9b69913Ad545", mockTransferAmount);
+    const transfer = await this.MIATokenV0Proxy.transferFrom(this.owner, this.spender, mockTransferAmount);
     
     const postTransferFromBalanceOfProxy = Number(await this.MIATokenV0Proxy.balanceOf(this.owner));
-    const postTransferFromBalanceOfRecipient = Number((await this.MIATokenV0Proxy.balanceOf("0x5Db06acd673531218B10430bA6dE9b69913Ad545")));
+    const postTransferFromBalanceOfRecipient = Number((await this.MIATokenV0Proxy.balanceOf(this.spender)));
 
     expect(balanceOf).to.equals(0);
     expect(postTransferFromBalanceOfRecipient).to.equals(mockTransferAmount);

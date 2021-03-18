@@ -28,12 +28,7 @@ abstract contract MIATokenOwnable is Context {
       _owner = msgSender;
       emit OwnershipTransferred(address(0), msgSender);
     }
-    
-    function setOwner(address newOwner) internal onlyOwner {
-      address previousOwner = _owner;
-      _owner = newOwner;
-      emit OwnershipTransferred(previousOwner, newOwner);
-    }
+
 
     /**
      * @dev Returns the address of the current owner.

@@ -8,11 +8,11 @@ export type { TransparentUpgradeableProxy } from "./TransparentUpgradeableProxy"
 export type { UpgradeableProxy } from "./UpgradeableProxy";
 export type { ERC20 } from "./ERC20";
 export type { IERC20 } from "./IERC20";
-export type { MIATokenLedger } from "./MIATokenLedger";
 export type { MIATokenProxy } from "./MIATokenProxy";
 export type { MIATokenProxyAdmin } from "./MIATokenProxyAdmin";
 export type { MIATokenOwnable } from "./MIATokenOwnable";
 export type { MIATokenV0 } from "./MIATokenV0";
+export type { MIATokenV00 } from "./MIATokenV00";
 export type { MIATokenV1 } from "./MIATokenV1";
 
 export { Ownable__factory } from "./factories/Ownable__factory";
@@ -22,9 +22,9 @@ export { TransparentUpgradeableProxy__factory } from "./factories/TransparentUpg
 export { UpgradeableProxy__factory } from "./factories/UpgradeableProxy__factory";
 export { ERC20__factory } from "./factories/ERC20__factory";
 export { IERC20__factory } from "./factories/IERC20__factory";
-export { MIATokenLedger__factory } from "./factories/MIATokenLedger__factory";
 export { MIATokenProxy__factory } from "./factories/MIATokenProxy__factory";
 export { MIATokenProxyAdmin__factory } from "./factories/MIATokenProxyAdmin__factory";
 export { MIATokenOwnable__factory } from "./factories/MIATokenOwnable__factory";
 export { MIATokenV0__factory } from "./factories/MIATokenV0__factory";
+export { MIATokenV00__factory } from "./factories/MIATokenV00__factory";
 export { MIATokenV1__factory } from "./factories/MIATokenV1__factory";

@@ -33,6 +33,7 @@
     "deploy:proxy:rinkeby": "npx hardhat run scripts/deploy/proxy/deploy.ts --network rinkeby",
     "test": "yarn test:proxy",
     "test:proxy": "npx hardhat test test/proxy/deploy-proxy.test.ts",
-    "solhint": "./node_modules/.bin/solhint -f table contracts/**/*.sol"
+    "solhint": "./node_modules/.bin/solhint -f table contracts/**/*.sol",
+    "lint": "yarn solhint"
   }
 }
