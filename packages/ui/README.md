@@ -2,6 +2,8 @@
 
 Stablecoin govern by the city of Miami.
 
+This UI is for testing and interacting with the MIA Token.
+
 ## Available Scripts
 
 In the project directory, you can run:
