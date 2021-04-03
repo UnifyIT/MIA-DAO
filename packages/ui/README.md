@@ -1,6 +1,6 @@
 # MIA DAO
 
-Stablecoin govern by the city of Miami.
+A stablecoin governed by the city of Miami.
 
 This UI is for testing and interacting with the MIA Token.
 
