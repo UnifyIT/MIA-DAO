@@ -1,6 +1,6 @@
 # MIA DAO
 
-A stablecoin governed by the city of Miami.
+A community based DAO to eraducate different forms of extreme poverty out of US cities.
 
 Commands to run
 
